@@ -1,0 +1,2 @@
+# DIAGRAMA ENTIDAD-RELACION DEL SISTEMA DE GESTION DE RETOS
+![ERD](./src/main/resources/ERD%20Gestion_de_Retos.png)
