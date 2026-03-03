@@ -1,8 +1,8 @@
 package com.gestion_retos.repository;
 
-import com.gestion_retos.model.Challenge;
+import com.gestion_retos.model.User;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ChallengeRepository extends JpaRepository<@NonNull Challenge,@NonNull Long>{
+public interface UserRepository extends JpaRepository<@NonNull User,@NonNull Long>{
 }
