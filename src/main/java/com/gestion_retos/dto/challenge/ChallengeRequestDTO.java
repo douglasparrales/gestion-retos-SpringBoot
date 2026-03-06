@@ -1,23 +1,22 @@
-package com.gestion_retos.dto;
+package com.gestion_retos.dto.challenge;
 
 import lombok.AllArgsConstructor;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import java.time.LocalDate;
 
-@Getter @Setter
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChallengeDTO {
-    private Long challengeId;
+public class ChallengeRequestDTO {
     private String title;
     private String description;
     private Integer points;
-    private LocalDate dateOpen;
-    private LocalDate dateEnd;
-    //User
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Long creatorId;
 }

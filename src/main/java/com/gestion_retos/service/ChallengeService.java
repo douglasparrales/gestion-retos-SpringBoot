@@ -1,7 +1,6 @@
 package com.gestion_retos.service;
 
-import com.gestion_retos.dto.ChallengeDTO;
-import com.gestion_retos.dto.InscriptionDTO;
+import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,32 +8,32 @@ import java.util.List;
 @Service
 public class ChallengeService implements IChallengeService{
     @Override
-    public List<ChallengeDTO> getAllChallenges() {
+    public List<ChallengeResponseDTO> getAllChallenges() {
         return List.of();
     }
 
     @Override
-    public ChallengeDTO getChallengeByID(Long id) {
+    public ChallengeResponseDTO getChallengeByID(Long id) {
         return null;
     }
 
     @Override
-    public ChallengeDTO createChallenge(ChallengeDTO challengeDto) {
+    public ChallengeResponseDTO createChallenge(ChallengeResponseDTO challengeDto) {
         return null;
     }
 
     @Override
-    public InscriptionDTO createInscription(Long challengeID, Long userId, InscriptionDTO inscriptionDto) {
+    public InscriptionResponseDTO createInscription(Long challengeID, Long userId, InscriptionResponseDTO inscriptionResponseDto) {
         return null;
     }
 
     @Override
-    public InscriptionDTO completeInscription(Long challengeID, Long userId, InscriptionDTO inscriptionDto) {
+    public InscriptionResponseDTO completeInscription(Long challengeID, Long userId, InscriptionResponseDTO inscriptionResponseDto) {
         return null;
     }
 
     @Override
-    public ChallengeDTO updateChallenge(Long id, ChallengeDTO challengeDto) {
+    public ChallengeResponseDTO updateChallenge(Long id, ChallengeResponseDTO challengeDto) {
         return null;
     }
 

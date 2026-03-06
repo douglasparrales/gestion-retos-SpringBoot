@@ -1,4 +1,4 @@
-package com.gestion_retos.dto;
+package com.gestion_retos.dto.user;
 
 import lombok.AllArgsConstructor;
 
@@ -11,12 +11,10 @@ import java.time.LocalDate;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class InscriptionDTO {
-    private Long inscriptionId;
-    private LocalDate inscriptionDate;
-    private boolean completed;
-    //User
+public class UserResponseDTO {
     private Long userId;
-    //Challenge
-    private Long challengeId;
+    private String username;
+    private String email;
+    private Integer totalPoints;
+    private LocalDate registrationDate;
 }

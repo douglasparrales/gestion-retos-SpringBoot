@@ -1,28 +1,27 @@
 package com.gestion_retos.service;
 
-import com.gestion_retos.dto.ChallengeDTO;
-import com.gestion_retos.dto.InscriptionDTO;
+import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
 
 import java.util.List;
 
 public interface IChallengeService {
     //getAll
-    List<ChallengeDTO> getAllChallenges();
+    List<ChallengeResponseDTO> getAllChallenges();
 
     //getChallengeByID
-    ChallengeDTO getChallengeByID(Long id);
+    ChallengeResponseDTO getChallengeByID(Long id);
 
     //create
-    ChallengeDTO createChallenge(ChallengeDTO challengeDto);
+    ChallengeResponseDTO createChallenge(ChallengeResponseDTO challengeDto);
 
     //createInscription
-    InscriptionDTO createInscription(Long challengeID, Long userId, InscriptionDTO inscriptionDto);
+    InscriptionResponseDTO createInscription(Long challengeID, Long userId, InscriptionResponseDTO inscriptionResponseDto);
 
     //completeChallenge
-    InscriptionDTO completeInscription(Long challengeID, Long userId, InscriptionDTO inscriptionDto);
+    InscriptionResponseDTO completeInscription(Long challengeID, Long userId, InscriptionResponseDTO inscriptionResponseDto);
 
     //update
-    ChallengeDTO updateChallenge(Long id, ChallengeDTO challengeDto);
+    ChallengeResponseDTO updateChallenge(Long id, ChallengeResponseDTO challengeDto);
 
     //delete
     void deleteChallenge(Long id);

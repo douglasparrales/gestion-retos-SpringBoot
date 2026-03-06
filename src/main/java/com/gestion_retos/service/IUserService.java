@@ -1,21 +1,21 @@
 package com.gestion_retos.service;
 
-import com.gestion_retos.dto.UserDTO;
+import com.gestion_retos.dto.user.UserResponseDTO;
 
 import java.util.List;
 
 public interface IUserService {
     //getAllUsersByRanking
-    List<UserDTO> getAllUsersByRanking();
+    List<UserResponseDTO> getAllUsersByRanking();
 
     //getUserById
-    UserDTO getUserById(Long id);
+    UserResponseDTO getUserById(Long id);
 
     //createUser
-    UserDTO createUser(UserDTO userDto);
+    UserResponseDTO createUser(UserResponseDTO userResponseDto);
 
     //updateUser
-    UserDTO updateUser(Long id, UserDTO userDto);
+    UserResponseDTO updateUser(Long id, UserResponseDTO userResponseDto);
 
     //deleteUser
     void deleteUser(Long id);
