@@ -1,44 +1,29 @@
 package com.gestion_retos.service;
 
+import com.gestion_retos.dto.challenge.ChallengeRequestDTO;
 import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ChallengeService implements IChallengeService{
-    @Override
-    public List<ChallengeResponseDTO> getAllChallenges() {
-        return List.of();
-    }
+public interface ChallengeService {
+    //getAll
+    List<ChallengeResponseDTO> getAllChallenges();
 
-    @Override
-    public ChallengeResponseDTO getChallengeByID(Long id) {
-        return null;
-    }
+    //getChallengeByID
+    ChallengeResponseDTO getChallengeByID(Long id);
 
-    @Override
-    public ChallengeResponseDTO createChallenge(ChallengeResponseDTO challengeDto) {
-        return null;
-    }
+    //create
+    ChallengeResponseDTO createChallenge(ChallengeRequestDTO challengeDto);
 
-    @Override
-    public InscriptionResponseDTO createInscription(Long challengeID, Long userId, InscriptionResponseDTO inscriptionResponseDto) {
-        return null;
-    }
+    //createInscription
+    void createInscription(Long challengeId, Long userId);
 
-    @Override
-    public InscriptionResponseDTO completeInscription(Long challengeID, Long userId, InscriptionResponseDTO inscriptionResponseDto) {
-        return null;
-    }
+    //completeChallenge
+    void completeChallenge(Long challengeId, Long userId);
 
-    @Override
-    public ChallengeResponseDTO updateChallenge(Long id, ChallengeResponseDTO challengeDto) {
-        return null;
-    }
+    //update
+    ChallengeResponseDTO updateChallenge(Long id, ChallengeRequestDTO challengeDto);
 
-    @Override
-    public void deleteChallenge(Long id) {
-
-    }
+    //delete
+    void deleteChallenge(Long id);
 }

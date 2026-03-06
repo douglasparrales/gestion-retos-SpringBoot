@@ -1,40 +1,23 @@
 package com.gestion_retos.service;
 
+import com.gestion_retos.dto.user.UserRequestDTO;
 import com.gestion_retos.dto.user.UserResponseDTO;
-import com.gestion_retos.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class UserService implements IUserService{
+public interface UserService {
+    //getAllUsersByRanking
+    List<UserResponseDTO> getAllUsersByRanking();
 
-    @Autowired
-    UserRepository repository;
+    //getUserById
+    UserResponseDTO getUserById(Long id);
 
-    @Override
-    public List<UserResponseDTO> getAllUsersByRanking() {
-        return repository.findAll();
-    }
+    //createUser
+    UserResponseDTO createUser(UserRequestDTO userRequestDTO);
 
-    @Override
-    public UserResponseDTO getUserById(Long id) {
-        return null;
-    }
+    //updateUser
+    UserResponseDTO updateUser(Long id, UserRequestDTO userRequestDTO);
 
-    @Override
-    public UserResponseDTO createUser(UserResponseDTO userResponseDto) {
-        return null;
-    }
-
-    @Override
-    public UserResponseDTO updateUser(Long id, UserResponseDTO userResponseDto) {
-        return null;
-    }
-
-    @Override
-    public void deleteUser(Long id) {
-
-    }
+    //deleteUser
+    void deleteUser(Long id);
 }
