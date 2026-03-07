@@ -10,25 +10,31 @@ public class UserMapper {
 
     // Entity -> ResponseDTO
     public UserResponseDTO toResponseDto(User user){
-        UserResponseDTO dto = new UserResponseDTO();
 
-        dto.setUserId(user.getUserId());
-        dto.setUsername(user.getUsername());
-        dto.setEmail(user.getEmail());
-        dto.setTotalPoints(user.getTotalPoints());
-        dto.setRegistrationDate(user.getRegistrationDate());
+        if (user == null) {
+            return  null;
+        }
 
-        return dto;
+         return UserResponseDTO.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .totalPoints(user.getTotalPoints())
+                .registrationDate(user.getRegistrationDate())
+                .build();
     }
 
     // RequestDTO -> Entity
     public User toEntity(UserRequestDTO dto){
-        User user = new User();
 
-        user.setUsername(dto.getUsername());
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
+        if (dto == null){
+            return null;
+        }
 
-        return user;
+         return User.builder()
+                .username(dto.getUsername())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .build();
     }
 }

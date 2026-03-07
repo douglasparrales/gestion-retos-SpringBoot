@@ -11,29 +11,34 @@ public class ChallengeMapper {
     //Entity -> ResponseDTO.  When Out
     public ChallengeResponseDTO toResponseDto(Challenge challenge){
 
-        ChallengeResponseDTO dto = new ChallengeResponseDTO();
-        dto.setChallengeId(challenge.getChallengeId());
-        dto.setDescription(challenge.getDescription());
-        dto.setCreator(challenge.getUser().getUserId());
-        dto.setPoints(challenge.getPoints());
-        dto.setTitle(challenge.getTitle());
-        dto.setEndDate(challenge.getEndDate());
-        dto.setStartDate(challenge.getStartDate());
+        if (challenge == null){
+            return null;
+        }
 
-        return dto;
+        return ChallengeResponseDTO.builder()
+                .challengeId(challenge.getChallengeId())
+                .description(challenge.getDescription())
+                .creator(challenge.getUser().getUserId())
+                .points(challenge.getPoints())
+                .title(challenge.getTitle())
+                .endDate(challenge.getEndDate())
+                .startDate(challenge.getStartDate())
+                .build();
     }
 
     //RequestDTO -> Entity. When In
     public Challenge toEntity(ChallengeRequestDTO dto){
 
-        Challenge challenge = new Challenge();
+        if (dto == null){
+            return null;
+        }
 
-        challenge.setDescription(dto.getDescription());
-        challenge.setTitle(dto.getTitle());
-        challenge.setStartDate(dto.getStartDate());
-        challenge.setEndDate(dto.getEndDate());
-        challenge.setPoints(dto.getPoints());
-
-        return challenge;
+        return Challenge.builder()
+                .description(dto.getDescription())
+                .title(dto.getTitle())
+                .startDate(dto.getStartDate())
+                .endDate(dto.getEndDate())
+                .points(dto.getPoints())
+                .build();
     }
 }

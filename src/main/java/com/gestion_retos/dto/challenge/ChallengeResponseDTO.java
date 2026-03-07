@@ -1,16 +1,13 @@
 package com.gestion_retos.dto.challenge;
 
-import lombok.AllArgsConstructor;
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ChallengeResponseDTO {
     private Long challengeId;
     private String title;
