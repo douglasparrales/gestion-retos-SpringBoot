@@ -40,6 +40,23 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     @Override
     public ChallengeResponseDTO createChallenge(ChallengeRequestDTO challengeDto) {
+
+        LocalDate today = LocalDate.now();
+        LocalDate endDate= challengeDto.getEndDate();
+        LocalDate startDate = challengeDto.getStartDate();
+
+        if(startDate.isAfter(endDate)){
+            throw  new IllegalStateException("Start date must be before end date");
+        }
+
+        if (endDate.isBefore(today)){
+            throw new IllegalStateException("End date cannot be in the past");
+        }
+
+        if (startDate.isBefore(today)) {
+            throw new IllegalStateException("Start date cannot be in the past");
+        }
+
         Challenge challenge = mapper.toEntity(challengeDto);
         Challenge savedChallenge = repo.save(challenge);
         return mapper.toResponseDto(savedChallenge);

@@ -1,6 +1,17 @@
 # DIAGRAMA ENTIDAD-RELACION DEL SISTEMA DE GESTION DE RETOS
 ![ERD](./src/main/resources/ERD%20Gestion_de_Retos.png)
 
+# 🚀 Objetivo del proyecto
+
+Practicar conceptos clave de desarrollo backend:
+
+* Diseño de APIs REST
+* Arquitectura por capas
+* Manejo de DTOs
+* Reglas de negocio
+* Relaciones en base de datos
+* Buenas prácticas en proyectos con Spring Boot
+
 # 🏆 Challenge Management API
 
 API REST para la gestión de **retos** donde los usuarios pueden inscribirse, completarlos y acumular puntos.
@@ -124,9 +135,9 @@ El sistema debe cumplir las siguientes reglas:
 
 * Un usuario **no puede inscribirse dos veces** al mismo reto.  //DONE
 * Un usuario **no puede completar un reto si no está inscrito**.//DONE
-  * Al completar un reto **se suman los puntos al usuario**.    //DONE
-    * No se puede inscribir a un reto **si ya está vencido**.     //DONE
-* Las fechas del reto deben ser **validadas correctamente**.
+* Al completar un reto **se suman los puntos al usuario**.      //DONE
+* No se puede inscribir a un reto **si ya está vencido**.       //DONE
+* Las fechas del reto deben ser **validadas correctamente**     //DONE
 
 ---
 
@@ -160,14 +171,3 @@ Para aumentar la complejidad del proyecto se pueden implementar las siguientes m
 * Usar MapStruct para mapear DTOs.
 
 ---
-
-# 🚀 Objetivo del proyecto
-
-Practicar conceptos clave de desarrollo backend:
-
-* Diseño de APIs REST
-* Arquitectura por capas
-* Manejo de DTOs
-* Reglas de negocio
-* Relaciones en base de datos
-* Buenas prácticas en proyectos con Spring Boot
