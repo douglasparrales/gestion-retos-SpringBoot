@@ -122,10 +122,10 @@ PUT /challenges/{id}/complete/{userId}
 
 El sistema debe cumplir las siguientes reglas:
 
-* Un usuario **no puede inscribirse dos veces** al mismo reto.
-* Un usuario **no puede completar un reto si no está inscrito**.
-* Al completar un reto **se suman los puntos al usuario**.
-* No se puede inscribir a un reto **si ya está vencido**.
+* Un usuario **no puede inscribirse dos veces** al mismo reto.  //DONE
+* Un usuario **no puede completar un reto si no está inscrito**.//DONE
+  * Al completar un reto **se suman los puntos al usuario**.    //DONE
+    * No se puede inscribir a un reto **si ya está vencido**.     //DONE
 * Las fechas del reto deben ser **validadas correctamente**.
 
 ---
