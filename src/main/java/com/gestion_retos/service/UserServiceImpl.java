@@ -17,21 +17,20 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository repo;
-    private UserMapper mapper;
 
     @Override
     public List<UserResponseDTO> getAllUsersByRanking() {
         //1. find all | 2.sort desc | 3. to dto | 4. to list
          return repo.findAll(Sort.by(Sort.Direction.DESC, "totalPoints"))
                  .stream()
-                 .map(mapper::toResponseDto)
+                 .map(UserMapper::toResponseDto)
                  .toList();
     }
 
     @Override
     public UserResponseDTO getUserById(Long id) {
         //1. find exist | 2. toDto | 3. or else return exception
-        return repo.findById(id).map(mapper::toResponseDto)
+        return repo.findById(id).map(UserMapper::toResponseDto)
                 .orElseThrow(() -> new ResourceNotFoundException("User have been not found with id: " + id));
     }
 
@@ -40,9 +39,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
         //1. request to entity | 2. save | 3. entity to response
-        User user = mapper.toEntity(userRequestDTO);
+        User user = UserMapper.toEntity(userRequestDTO);
         User savedUser = repo.save(user);
-        return mapper.toResponseDto(savedUser);
+        return UserMapper.toResponseDto(savedUser);
     }
 
     @Override
@@ -57,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
          User updateUser = repo.save(user);
 
-         return mapper.toResponseDto(updateUser);
+         return UserMapper.toResponseDto(updateUser);
     }
 
     @Override

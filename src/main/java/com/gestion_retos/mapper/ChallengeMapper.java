@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class ChallengeMapper {
 
     //Entity -> ResponseDTO.  When Out
-    public ChallengeResponseDTO toResponseDto(Challenge challenge){
+    public static ChallengeResponseDTO toResponseDto(Challenge challenge){
 
         if (challenge == null){
             return null;
@@ -27,7 +27,7 @@ public class ChallengeMapper {
     }
 
     //RequestDTO -> Entity. When In
-    public Challenge toEntity(ChallengeRequestDTO dto){
+    public static Challenge toEntity(ChallengeRequestDTO dto){
 
         if (dto == null){
             return null;

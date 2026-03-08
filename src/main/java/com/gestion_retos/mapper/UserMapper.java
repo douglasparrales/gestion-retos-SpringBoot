@@ -5,11 +5,13 @@ import com.gestion_retos.dto.user.UserResponseDTO;
 import com.gestion_retos.model.User;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class UserMapper {
 
     // Entity -> ResponseDTO
-    public UserResponseDTO toResponseDto(User user){
+    public static UserResponseDTO toResponseDto(User user){
 
         if (user == null) {
             return  null;
@@ -25,7 +27,7 @@ public class UserMapper {
     }
 
     // RequestDTO -> Entity
-    public User toEntity(UserRequestDTO dto){
+    public static User toEntity(UserRequestDTO dto){
 
         if (dto == null){
             return null;
@@ -35,6 +37,8 @@ public class UserMapper {
                 .username(dto.getUsername())
                 .email(dto.getEmail())
                 .password(dto.getPassword())
+                 .totalPoints(0)
+                 .registrationDate(LocalDate.now())
                 .build();
     }
 }

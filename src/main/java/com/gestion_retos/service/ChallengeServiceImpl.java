@@ -19,14 +19,13 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     @Autowired
     private ChallengeRepository repo;
-    private ChallengeMapper mapper;
     private UserRepository userRepo;
 
     @Override
     public List<ChallengeResponseDTO> getAllChallenges() {
         //1. find all | 2. sort by end date before actual date | 3. to dto | 4. to list
         return repo.findByEndDateAfter(LocalDate.now())
-                .stream().map(mapper::toResponseDto)
+                .stream().map(ChallengeMapper::toResponseDto)
                 .toList();
     }
 
@@ -35,7 +34,7 @@ public class ChallengeServiceImpl implements ChallengeService {
         //1. exist | 2. find by id | 3. to dto
         Challenge challenge = repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("id: "+id+" not exist"));
-        return mapper.toResponseDto(challenge);
+        return ChallengeMapper.toResponseDto(challenge);
     }
 
     @Override
@@ -57,9 +56,9 @@ public class ChallengeServiceImpl implements ChallengeService {
             throw new IllegalStateException("Start date cannot be in the past");
         }
 
-        Challenge challenge = mapper.toEntity(challengeDto);
+        Challenge challenge = ChallengeMapper.toEntity(challengeDto);
         Challenge savedChallenge = repo.save(challenge);
-        return mapper.toResponseDto(savedChallenge);
+        return ChallengeMapper.toResponseDto(savedChallenge);
     }
 
     @Override
@@ -78,7 +77,7 @@ public class ChallengeServiceImpl implements ChallengeService {
         challenge.setUser(user);
 
         Challenge savedChallenge = repo.save(challenge);
-        return mapper.toResponseDto(savedChallenge);
+        return ChallengeMapper.toResponseDto(savedChallenge);
     }
 
     @Override
