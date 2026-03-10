@@ -8,18 +8,19 @@ import com.gestion_retos.model.Challenge;
 import com.gestion_retos.model.User;
 import com.gestion_retos.repository.ChallengeRepository;
 import com.gestion_retos.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class ChallengeServiceImpl implements ChallengeService {
 
-    @Autowired
-    private ChallengeRepository repo;
-    private UserRepository userRepo;
+    private final ChallengeRepository repo;
+    private final UserRepository userRepo;
 
     @Override
     public List<ChallengeResponseDTO> getAllChallenges() {
@@ -56,7 +57,11 @@ public class ChallengeServiceImpl implements ChallengeService {
             throw new IllegalStateException("Start date cannot be in the past");
         }
 
+        User user = userRepo.findById(challengeDto.getCreatorId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
         Challenge challenge = ChallengeMapper.toEntity(challengeDto);
+        challenge.setUser(user);
         Challenge savedChallenge = repo.save(challenge);
         return ChallengeMapper.toResponseDto(savedChallenge);
     }

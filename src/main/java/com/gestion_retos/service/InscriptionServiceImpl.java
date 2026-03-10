@@ -8,17 +8,19 @@ import com.gestion_retos.repository.ChallengeRepository;
 import com.gestion_retos.repository.InscriptionRepository;
 import com.gestion_retos.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-
+@AllArgsConstructor
+@Service
 public class InscriptionServiceImpl implements InscriptionService{
 
-    @Autowired
-    private InscriptionRepository repo;
-    private UserRepository userRepo;
-    private ChallengeRepository challengeRepo;
+
+    private final InscriptionRepository repo;
+    private final UserRepository userRepo;
+    private final ChallengeRepository challengeRepo;
 
 
     @Override
