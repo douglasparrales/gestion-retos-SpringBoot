@@ -3,13 +3,13 @@ package com.gestion_retos.service;
 import com.gestion_retos.dto.challenge.ChallengeRequestDTO;
 import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
 import com.gestion_retos.exception.ResourceNotFoundException;
+import com.gestion_retos.exception.IllegalStateException;
 import com.gestion_retos.mapper.ChallengeMapper;
 import com.gestion_retos.model.Challenge;
 import com.gestion_retos.model.User;
 import com.gestion_retos.repository.ChallengeRepository;
 import com.gestion_retos.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
