@@ -1,122 +1,129 @@
-# 🏆 Challenge API – Sistema de Gestión de Retos
+# 🏆 Challenge API – Challenge Management System
 
 ![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=for-the-badge&logo=springboot)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql)
 ![Maven](https://img.shields.io/badge/Maven-3.x-red?style=for-the-badge&logo=apache-maven)
 
-API REST robusta desarrollada con **Spring Boot** para la gestión de retos interactivos. El sistema permite a los usuarios registrarse, participar en desafíos temporales y escalar en un ranking global mediante la obtención de puntos.
+A robust REST API developed with **Spring Boot** for managing interactive challenges. The system allows users to register, participate in time-limited challenges, and climb a global ranking by earning points.
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+## 🚀 Technologies Used
 
-* **Lenguaje:** Java 17
+* **Language:** Java 17
 * **Framework:** Spring Boot 3.x
-* **Persistencia:** Spring Data JPA / Hibernate
-* **Base de Datos:** PostgreSQL
-* **Gestión de Dependencias:** Maven
-* **Productividad:** Lombok
-* **Validación:** Jakarta Bean Validation
+* **Persistence:** Spring Data JPA / Hibernate
+* **Database:** PostgreSQL
+* **Dependency Management:** Maven
+* **Productivity:** Lombok
+* **Validation:** Jakarta Bean Validation
 
 ---
 
-## 🧠 Objetivos Técnicos Alcanzados
+## 🧠 Technical Objectives Achieved
 
-1.  **Diseño de API RESTful:** Uso correcto de verbos HTTP y códigos de estado.
-2.  **Arquitectura por Capas:** Separación estricta de responsabilidades (Controller, Service, Repository).
-3.  **Modelado de Relaciones:** Implementación de relaciones `@ManyToOne` y `@ManyToMany` con JPA.
-4.  **Lógica de Negocio Descentralizada:** Validación de reglas críticas en la capa de servicios.
-5.  **Manejo Global de Excepciones:** Uso de `@RestControllerAdvice` para respuestas de error estandarizadas.
+1.  **RESTful API Design:** Proper use of HTTP verbs and status codes.
+2.  **Layered Architecture:** Strict separation of concerns (Controller, Service, Repository).
+3.  **Relationship Modeling:** Implementation of `@ManyToOne` and `@ManyToMany` relationships using JPA.
+4.  **Decoupled Business Logic:** Critical rule validation within the service layer.
+5.  **Global Exception Handling:** Centralized error management using `@RestControllerAdvice` for standardized responses.
 
 ---
 
-## 🏗 Arquitectura del Sistema
+## 🏗 System Architecture
 
-El proyecto sigue un flujo de datos unidireccional para garantizar la mantenibilidad:
+The project follows a unidirectional data flow to ensure maintainability:
 
 `Client ↔ Controller ↔ Service ↔ Repository ↔ Database`
 
-### Capas Principales
-* **Controller:** Define los endpoints y gestiona el mapeo de los DTOs.
-* **Service:** Núcleo de la aplicación donde se validan las reglas de negocio.
-* **Repository:** Abstracción de acceso a datos mediante interfaces de Spring Data JPA.
-* **DTO (Data Transfer Objects):** Garantiza la seguridad y el desacoplamiento de las entidades internas.
+### Main Layers
+* **Controller:** Defines endpoints and manages DTO mapping.
+* **Service:** The core of the application where business rules are validated.
+* **Repository:** Data access abstraction using Spring Data JPA interfaces.
+* **DTO (Data Transfer Objects):** Ensures security and decoupling from internal entities.
 
 ---
 
-## 📊 Modelo de Datos (E-R)
+## 📊 Data Model (E-R)
 
-* **Usuario:** Gestiona credenciales y el acumulado de puntos (`puntosTotales`).
-* **Reto:** Contiene la configuración del desafío, fechas de vigencia y recompensa en puntos.
-* **Inscripción:** Entidad intermedia que registra el estado del progreso del usuario en un reto específico.
+* **User:** Manages credentials and accumulated score (`totalPoints`).
+* **Challenge:** Contains challenge configuration, validity dates, and point rewards.
+* **Enrollment:** Intermediate entity that tracks a user's progress within a specific challenge.
 
 ---
 
-## 🗺️ Diagrama de Entidad-Relación (ERD)
-![diagrama ERD](./src/main/resources/ERD%20Gestion_de_Retos.png)
+## 🗺️ Entity-Relationship Diagram (ERD)
+![ERD Diagram](./src/main/resources/ERD%20Gestion_de_Retos.png)
 
-## 🌐 Endpoints Principales
+---
 
-### 👤 Usuarios
-| Método | Endpoint | Descripción |
+## 🌐 Main Endpoints
+
+### 👤 Users
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `POST` | `/usuarios` | Registrar un nuevo usuario. |
-| `GET` | `/usuarios/{id}` | Consultar perfil y puntos. |
-| `GET` | `/usuarios/ranking` | Listar el TOP de usuarios por puntaje. |
+| `POST` | `/users` | Register a new user. |
+| `GET` | `/users/{id}` | Retrieve profile and points. |
+| `GET` | `/users/ranking` | List top users by score. |
 
-### 🎯 Retos
-| Método | Endpoint | Descripción |
+### 🎯 Challenges
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `POST` | `/retos` | Crear un nuevo reto (Admin). |
-| `GET` | `/retos` | Listar retos activos y pasados. |
-| `GET` | `/retos/{id}` | Ver detalles y requisitos del reto. |
+| `POST` | `/challenges` | Create a new challenge (Admin). |
+| `GET` | `/challenges` | List active and past challenges. |
+| `GET` | `/challenges/{id}` | View challenge details and requirements. |
 
-### 📝 Inscripciones
-| Método | Endpoint | Descripción |
+### 📝 Enrollments
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `POST` | `/retos/{rId}/inscribirse/{uId}` | Unirse a un reto vigente. |
-| `PUT` | `/retos/{rId}/completar/{uId}` | Finalizar reto y reclamar puntos. |
+| `POST` | `/challenges/{cId}/enroll/{uId}` | Join an active challenge. |
+| `PUT` | `/challenges/{cId}/complete/{uId}` | Complete a challenge and claim points. |
 
 ---
 
-## ⚙️ Reglas de Negocio Implementadas
+## ⚙️ Implemented Business Rules
 
-* ✅ **Unicidad:** Un usuario no puede inscribirse dos veces al mismo reto.
-* ✅ **Integridad:** Solo los usuarios inscritos pueden marcar un reto como "completado".
-* ✅ **Validación Temporal:** No se permiten inscripciones a retos cuya fecha de fin haya expirado.
-* ✅ **Recompensa:** Al completar un reto, los puntos se suman automáticamente al perfil del usuario de forma atómica.
+* ✅ **Uniqueness:** A user cannot enroll in the same challenge twice.
+* ✅ **Integrity:** Only enrolled users can mark a challenge as "completed."
+* ✅ **Time Validation:** Enrollments are not allowed for challenges that have already expired.
+* ✅ **Reward System:** Upon completion, points are automatically and atomically added to the user's profile.
 
 ---
 
-## 📦 Instalación y Ejecución
+## 📦 Installation and Execution
 
-1.  **Clonar el repositorio:**
+1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
-    cd tu-repositorio
+    git clone [https://github.com/your-user/your-repo.git](https://github.com/your-user/your-repo.git)
+    cd your-repo
     ```
 
-2.  **Configurar base de datos:**
-    Ajusta el archivo `src/main/resources/application.properties` con tus credenciales de PostgreSQL:
+2.  **Database Configuration:**
+    Update `src/main/resources/application.properties` with your PostgreSQL credentials:
     ```properties
-    spring.datasource.url=jdbc:postgresql://localhost:5432/nombre_db
-    spring.datasource.username=tu_usuario
-    spring.datasource.password=tu_contraseña
+    spring.datasource.url=jdbc:postgresql://localhost:5432/db_name
+    spring.datasource.username=your_username
+    spring.datasource.password=your_password
     ```
 
-3.  **Ejecutar con Maven:**
+3.  **Run with Maven:**
     ```bash
     mvn spring-boot:run
     ```
 
 ---
 
-## 🔮 Próximas Mejoras
+## 🔮 Roadmap & Future Improvements
 
-* [ ] Implementar seguridad con **Spring Security & JWT**.
-* [ ] Documentación interactiva con **Swagger / OpenAPI**.
-* [ ] Cobertura de tests unitarios con **JUnit 5 & Mockito**.
-* [ ] Contenerización con **Docker**.
-* [ ] Paginación y filtros avanzados en la lista de retos.
+* [ ] Implement security with **Spring Security & JWT**.
+* [ ] Interactive documentation with **Swagger / OpenAPI**.
+* [ ] Unit testing coverage with **JUnit 5 & Mockito**.
+* [ ] Containerization with **Docker**.
+* [ ] Advanced pagination and filtering for challenge lists.
 
+---
+
+## 👨‍💻 Author
+
+Developed as a practice project to enhance backend development skills with **Spring Boot**.
