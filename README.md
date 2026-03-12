@@ -1,49 +1,41 @@
-🏆 Challenge API – Gestión de Retos
+# 🏆 Challenge API – Gestión de Retos
 
+API REST desarrollada con **Spring Boot** que permite a los usuarios crear retos, inscribirse y completarlos para ganar puntos.
 
+Este proyecto fue desarrollado como **reto personal de aprendizaje durante 2 semanas**, con el objetivo de practicar desarrollo backend profesional, arquitectura de APIs y manejo de base de datos.
 
+---
 
+# 🚀 Tecnologías
 
+- Java 17
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- PostgreSQL
+- Maven
+- Lombok
 
-API REST desarrollada con Spring Boot que permite a los usuarios crear retos, inscribirse y completarlos para ganar puntos.
+---
 
-Este proyecto fue desarrollado como reto personal de aprendizaje durante 2 semanas, con el objetivo de practicar desarrollo backend profesional, arquitectura de APIs y manejo de base de datos.
-
-🚀 Tecnologías
-
-Java 17
-
-Spring Boot
-
-Spring Data JPA
-
-Hibernate
-
-PostgreSQL
-
-Maven
-
-Lombok
-
-🧠 Objetivo del proyecto
+# 🧠 Objetivo del proyecto
 
 Practicar conceptos clave del desarrollo backend:
 
-diseño de API REST
+- Diseño de **API REST**
+- **Arquitectura por capas**
+- Persistencia con **JPA**
+- Modelado de **entidades y relaciones**
+- Implementación de **reglas de negocio**
+- Manejo de **excepciones**
 
-arquitectura por capas
+---
 
-persistencia con JPA
-
-modelado de entidades y relaciones
-
-reglas de negocio
-
-manejo de excepciones
-
-🏗 Arquitectura
+# 🏗 Arquitectura
 
 El proyecto sigue una arquitectura típica de aplicaciones backend.
+
+```
 
 Controller
 ↓
@@ -52,86 +44,125 @@ Service
 Repository
 ↓
 Database
-Capas del proyecto
 
-Controller
+```
 
-Maneja las peticiones HTTP
+## Capas del proyecto
 
-Expone los endpoints de la API
+### Controller
+- Maneja las peticiones HTTP
+- Expone los endpoints de la API
 
-Service
+### Service
+- Contiene la lógica de negocio
+- Valida las reglas del sistema
 
-Contiene la lógica de negocio
+### Repository
+- Acceso a la base de datos usando **Spring Data JPA**
 
-Valida reglas del sistema
+### Entity
+- Representa las tablas de la base de datos
 
-Repository
+### DTO
+- Objetos utilizados para transferir datos entre cliente y servidor
 
-Acceso a la base de datos usando JPA
+---
 
-Entity
+# 📊 Modelo de datos
 
-Representa las tablas de la base de datos
+## Usuario
 
-DTO
+```
 
-Objetos utilizados para transferir datos entre cliente y servidor
-
-📊 Modelo de datos
 Usuario
-Usuario
-- id
-- username
-- email
-- password
-- puntosTotales
-- fechaRegistro
-  Reto
-  Reto
-- id
-- titulo
-- descripcion
-- puntos
-- fechaInicio
-- fechaFin
-- creador
-  Inscripción
-  Inscripcion
-- id
-- usuario
-- reto
-- fechaInscripcion
-- completado
 
-Relaciones implementadas usando Hibernate y Spring Data JPA.
+* id
+* username
+* email
+* password
+* puntosTotales
+* fechaRegistro
 
-🌐 Endpoints
-Usuarios
-Método	Endpoint	Descripción
-POST	/usuarios	Registrar usuario
-GET	/usuarios/{id}	Obtener perfil
-GET	/usuarios/ranking	Ranking por puntos
-Retos
-Método	Endpoint	Descripción
-POST	/retos	Crear reto
-GET	/retos	Listar retos
-GET	/retos/{id}	Detalle de reto
-Inscripciones
-Método	Endpoint	Descripción
-POST	/retos/{retoId}/inscribirse/{usuarioId}	Inscribirse a un reto
-PUT	/retos/{retoId}/completar/{usuarioId}	Completar un reto
-⚙️ Reglas de negocio
+```
 
-Un usuario no puede inscribirse dos veces al mismo reto.
+## Reto
 
-Un usuario no puede completar un reto si no está inscrito.
+```
 
-Al completar un reto se suman puntos al usuario.
+Reto
 
-No se puede inscribir a retos fuera de fecha.
+* id
+* titulo
+* descripcion
+* puntos
+* fechaInicio
+* fechaFin
+* creador
 
-📦 Estructura del proyecto
+```
+
+## Inscripción
+
+```
+
+Inscripcion
+
+* id
+* usuario
+* reto
+* fechaInscripcion
+* completado
+
+```
+
+Relaciones implementadas usando **Hibernate** y **Spring Data JPA**.
+
+---
+
+# 🌐 Endpoints
+
+## Usuarios
+
+| Método | Endpoint | Descripción |
+|------|------|------|
+| POST | `/usuarios` | Registrar usuario |
+| GET | `/usuarios/{id}` | Obtener perfil |
+| GET | `/usuarios/ranking` | Ranking por puntos |
+
+---
+
+## Retos
+
+| Método | Endpoint | Descripción |
+|------|------|------|
+| POST | `/retos` | Crear reto |
+| GET | `/retos` | Listar retos |
+| GET | `/retos/{id}` | Detalle de reto |
+
+---
+
+## Inscripciones
+
+| Método | Endpoint | Descripción |
+|------|------|------|
+| POST | `/retos/{retoId}/inscribirse/{usuarioId}` | Inscribirse a un reto |
+| PUT | `/retos/{retoId}/completar/{usuarioId}` | Completar un reto |
+
+---
+
+# ⚙️ Reglas de negocio
+
+- Un usuario **no puede inscribirse dos veces** al mismo reto.
+- Un usuario **no puede completar un reto si no está inscrito**.
+- Al completar un reto se **suman puntos al usuario**.
+- No se puede inscribir a retos **fuera de fecha**.
+
+---
+
+# 📦 Estructura del proyecto
+
+```
+
 src
 └─ main
 └─ java
@@ -141,60 +172,90 @@ src
 ├─ repository
 ├─ model
 ├─ dto
-└─ exception
-└─ mapper
+├─ exception
+├─ mapper
 └─ payload
-▶️ Cómo ejecutar el proyecto
-1️⃣ Clonar repositorio
-git clone https://github.com/tu-usuario/tu-repositorio.git
-2️⃣ Entrar al proyecto
+
+```
+
+---
+
+# ▶️ Cómo ejecutar el proyecto
+
+### 1️⃣ Clonar repositorio
+
+```
+
+git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
+
+```
+
+### 2️⃣ Entrar al proyecto
+
+```
+
 cd tu-repositorio
-3️⃣ Ejecutar aplicación
+
+```
+
+### 3️⃣ Ejecutar la aplicación
+
+```
+
 mvn spring-boot:run
+
+```
 
 La API se ejecutará en:
 
-http://localhost:8080
-🧪 Ejemplo de request
+```
 
-Crear usuario:
+[http://localhost:8080](http://localhost:8080)
 
-POST /usuarios
+````
+
+---
+
+# 🧪 Ejemplo de request
+
+### Crear usuario
+
+**POST /usuarios**
+
+```json
 {
-"username": "juan123",
-"email": "juan@email.com",
-"password": "123456"
+  "username": "juan123",
+  "email": "juan@email.com",
+  "password": "123456"
 }
-📚 Aprendizajes
+````
+
+---
+
+# 📚 Aprendizajes
 
 Durante este proyecto practiqué:
 
-Desarrollo de APIs REST
+* Desarrollo de **APIs REST**
+* **Arquitectura backend**
+* Modelado de relaciones con **JPA**
+* Manejo de **excepciones**
+* Separación de **responsabilidades**
+* Implementación de **lógica de negocio en servicios**
 
-Arquitectura backend
+---
 
-Modelado de relaciones con JPA
+# 🔮 Posibles mejoras
 
-Manejo de excepciones
+* Autenticación con **JWT**
+* Seguridad con **Spring Security**
+* Documentación con **Swagger UI**
+* Tests con **JUnit**
+* Paginación de resultados
+* **Dockerización** del proyecto
 
-Separación de responsabilidades
+---
 
-Lógica de negocio en servicios
+# 👨‍💻 Autor
 
-🔮 Posibles mejoras
-
-Autenticación con JWT
-
-Seguridad con Spring Security
-
-Documentación con Swagger UI
-
-Tests con JUnit
-
-Paginación de resultados
-
-Dockerización del proyecto
-
-👨‍💻 Autor
-
-Proyecto desarrollado como práctica para mejorar habilidades en backend con Spring Boot.
+Proyecto desarrollado como práctica para mejorar habilidades en backend con **Spring Boot**.
