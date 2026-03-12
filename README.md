@@ -7,8 +7,6 @@
 
 API REST robusta desarrollada con **Spring Boot** para la gestión de retos interactivos. El sistema permite a los usuarios registrarse, participar en desafíos temporales y escalar en un ranking global mediante la obtención de puntos.
 
-> **Nota del autor:** Este proyecto fue desarrollado como un reto personal de aprendizaje intensivo de 2 semanas, enfocado en dominar la persistencia de datos, reglas de negocio complejas y arquitectura limpia.
-
 ---
 
 ## 🚀 Tecnologías Utilizadas
