@@ -114,7 +114,7 @@ The project follows a unidirectional data flow to ensure maintainability:
 
 ---
 
-## 🔮 Roadmap & Future Improvements
+## 🔮 Future Improvements
 
 * [ ] Implement security with **Spring Security & JWT**.
 * [ ] Interactive documentation with **Swagger / OpenAPI**.
@@ -123,7 +123,3 @@ The project follows a unidirectional data flow to ensure maintainability:
 * [ ] Advanced pagination and filtering for challenge lists.
 
 ---
-
-## 👨‍💻 Author
-
-Developed as a practice project to enhance backend development skills with **Spring Boot**.
