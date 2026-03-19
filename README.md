@@ -11,8 +11,8 @@ A robust REST API developed with **Spring Boot** for managing interactive challe
 
 ## 🚀 Technologies Used
 
-* **Language:** Java 17
-* **Framework:** Spring Boot 3.x
+* **Language:** Java 25
+* **Framework:** Spring Boot 4.x
 * **Persistence:** Spring Data JPA / Hibernate
 * **Database:** PostgreSQL
 * **Dependency Management:** Maven
