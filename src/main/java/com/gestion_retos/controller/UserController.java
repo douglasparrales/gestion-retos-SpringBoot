@@ -3,6 +3,7 @@ package com.gestion_retos.controller;
 import com.gestion_retos.dto.user.UserRequestDTO;
 import com.gestion_retos.dto.user.UserResponseDTO;
 import com.gestion_retos.service.UserService;
+import jakarta.validation.Valid;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +32,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<@NonNull UserResponseDTO> createUser(@RequestBody UserRequestDTO userRequestDTO){
+    public ResponseEntity<@NonNull UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
         UserResponseDTO userResponseDTO = userService.createUser(userRequestDTO);
         return ResponseEntity.created(URI.create("/system/api/v1/user/"+ userResponseDTO.getUserId())).body(userResponseDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<@NonNull UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO){
+    public ResponseEntity<@NonNull UserResponseDTO> updateUser(@PathVariable Long id,@Valid @RequestBody UserRequestDTO userRequestDTO){
         UserResponseDTO userResponseDTO = userService.updateUser(id, userRequestDTO);
         return ResponseEntity.ok(userResponseDTO);
     }
