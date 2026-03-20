@@ -4,6 +4,7 @@ import com.gestion_retos.dto.challenge.ChallengeRequestDTO;
 import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
 import com.gestion_retos.service.ChallengeService;
 import com.gestion_retos.service.InscriptionService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class ChallengeController {
     }
 
     @PostMapping
-    public ResponseEntity<@NonNull ChallengeResponseDTO> createChallenge(@RequestBody ChallengeRequestDTO challengeRequestDTO){
+    public ResponseEntity<@NonNull ChallengeResponseDTO> createChallenge(@Valid @RequestBody ChallengeRequestDTO challengeRequestDTO){
         ChallengeResponseDTO challengeResponseDTO = challengeService.createChallenge(challengeRequestDTO);
         return ResponseEntity.created(URI.create("/system/api/v1/challenge/"+challengeResponseDTO.getChallengeId())).body(challengeResponseDTO);
     }
@@ -45,7 +46,7 @@ public class ChallengeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<@NonNull ChallengeResponseDTO> putChallenge(@PathVariable Long id, @RequestBody ChallengeRequestDTO challengeRequestDTO){
+    public ResponseEntity<@NonNull ChallengeResponseDTO> putChallenge(@PathVariable Long id,@Valid @RequestBody ChallengeRequestDTO challengeRequestDTO){
         ChallengeResponseDTO challengeResponseDTO = challengeService.updateChallenge(id, challengeRequestDTO);
         return ResponseEntity.ok(challengeResponseDTO);
     }

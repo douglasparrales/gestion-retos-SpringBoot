@@ -4,6 +4,7 @@ import com.gestion_retos.payload.ErrorResponse;
 import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,7 +20,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<@NonNull ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex){
 
         ErrorResponse error = new ErrorResponse(
-                ex.getMessage(),
+                "Resource not found :(",
                 HttpStatus.NOT_FOUND.value(),
                 LocalDate.now(),
                 null
@@ -40,6 +41,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+
+    //Exception for @Valid
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<@NonNull ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
@@ -58,10 +61,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<@NonNull ErrorResponse> handleInvalidFormat(HttpMessageNotReadableException ex){
+        ErrorResponse error = new ErrorResponse(
+                "Invalid request format (check dates or JSON)",
+                HttpStatus.BAD_REQUEST.value(),
+                LocalDate.now(),
+                null
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<@NonNull ErrorResponse> handleGeneral(Exception ex){
         ErrorResponse error = new ErrorResponse(
-                "Internal server error",
+                "Internal server error :(",
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 LocalDate.now(),
                 null
