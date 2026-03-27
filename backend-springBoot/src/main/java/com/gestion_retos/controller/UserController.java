@@ -2,23 +2,24 @@ package com.gestion_retos.controller;
 
 import com.gestion_retos.dto.user.UserRequestDTO;
 import com.gestion_retos.dto.user.UserResponseDTO;
+import com.gestion_retos.service.InscriptionService;
 import com.gestion_retos.service.UserService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.jspecify.annotations.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RestController
+@AllArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<@NonNull List<UserResponseDTO>> getAllUsersByRanking(){
