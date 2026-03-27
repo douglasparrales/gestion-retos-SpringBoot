@@ -15,8 +15,11 @@
     <div class="logo">🏆 Reto<span>Pro</span></div>
     
     <div class="nav-actions">
+      <button class="btn-ghost" onclick="openUserDirectory()">
+        <i data-lucide="list"></i> Directorio
+      </button>
       <button class="btn-ghost" onclick="toggleModal('user-modal')">
-        <i data-lucide="users"></i> Usuarios
+        <i data-lucide="user-plus"></i> Nuevo Usuario
       </button>
       <button class="btn-primary" onclick="toggleModal('challenge-modal')">
         <i data-lucide="plus"></i> Nuevo Reto
@@ -31,8 +34,7 @@
       <h2>Retos Disponibles</h2>
       <p>Selecciona un reto para ver detalles e inscritos</p>
     </div>
-    <div id="challenges-list" class="grid-challenges">
-      </div>
+    <div id="challenges-list" class="grid-challenges"></div>
   </section>
 
   <aside class="details-column" id="details-panel">
@@ -57,8 +59,7 @@
 
       <div class="participants-section">
         <h3><i data-lucide="users"></i> Participantes Inscritos</h3>
-        <div id="participants-list" class="participants-list">
-          </div>
+        <div id="participants-list" class="participants-list"></div>
       </div>
     </div>
   </aside>
@@ -71,7 +72,7 @@
         <input id="username" placeholder="Nombre de usuario">
         <input id="email" type="email" placeholder="Correo electrónico">
         <input id="password" type="password" placeholder="Contraseña">
-        <div class="modal-footer">
+        <div class="modal-footer" style="display:flex; justify-content:flex-end; gap:10px; margin-top:15px;">
           <button class="btn-ghost" onclick="toggleModal('user-modal')">Cerrar</button>
           <button class="btn-primary" onclick="createUser()">Guardar</button>
         </div>
@@ -84,17 +85,42 @@
       <h3>Nuevo Reto</h3>
       <div class="form-vertical">
         <input id="title" placeholder="Título">
-        <textarea id="description" placeholder="Descripción"></textarea>
+        <textarea id="description" placeholder="Descripción" style="padding:10px; border-radius:8px; border:1px solid var(--border);"></textarea>
         <input id="points" type="number" placeholder="Puntos">
+        <label style="font-size:0.8rem; color:gray;">Fecha Inicio</label>
         <input id="startDate" type="date">
+        <label style="font-size:0.8rem; color:gray;">Fecha Fin</label>
         <input id="endDate" type="date">
-        <input id="creatorId" placeholder="ID del Creador">
-        <div class="modal-footer">
+        <input id="creatorId" placeholder="ID del Creador (Usuario)">
+        <div class="modal-footer" style="display:flex; justify-content:flex-end; gap:10px; margin-top:15px;">
           <button class="btn-ghost" onclick="toggleModal('challenge-modal')">Cancelar</button>
           <button class="btn-primary" onclick="createChallenge()">Publicar</button>
         </div>
       </div>
     </div>
+</div>
+
+<div id="directory-modal" class="modal">
+  <div class="modal-content" style="max-width: 800px; width: 95%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+      <h3 style="margin:0;">👥 Directorio Global</h3>
+      <button class="btn-ghost" onclick="toggleModal('directory-modal')">Cerrar</button>
+    </div>
+    <div class="table-container">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Puntos</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="global-users-list"></tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div id="toast" class="toast"></div>
