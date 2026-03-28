@@ -1,7 +1,7 @@
 # 🏆 Challenge API – Challenge Management System
 
-![Java](https://img.shields.io/badge/Java-25-orange?style=for-the-badge&logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.x-brightgreen?style=for-the-badge&logo=springboot)
+![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=java)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?style=for-the-badge&logo=springboot)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql)
 ![Maven](https://img.shields.io/badge/Maven-3.x-red?style=for-the-badge&logo=apache-maven)
 
@@ -11,8 +11,8 @@ A robust REST API developed with **Spring Boot** for managing interactive challe
 
 ## 🚀 Technologies Used
 
-* **Language:** Java 25
-* **Framework:** Spring Boot 4.x
+* **Language:** Java 17
+* **Framework:** Spring Boot 3.x
 * **Persistence:** Spring Data JPA / Hibernate
 * **Database:** PostgreSQL
 * **Dependency Management:** Maven
