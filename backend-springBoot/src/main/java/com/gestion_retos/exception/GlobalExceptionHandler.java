@@ -1,7 +1,7 @@
 package com.gestion_retos.exception;
 
 import com.gestion_retos.payload.ErrorResponse;
-import org.jspecify.annotations.NonNull;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -17,7 +17,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<@NonNull ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex){
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex){
 
         ErrorResponse error = new ErrorResponse(
                 "Resource not found :( ",
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<@NonNull ErrorResponse> handleIllegalState(IllegalStateException ex){
+    public ResponseEntity<ErrorResponse> handleIllegalState(IllegalStateException ex){
         ErrorResponse error = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.BAD_REQUEST.value(),
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
 
     //Exception for @Valid
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<@NonNull ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex){
+    public ResponseEntity<ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex){
         Map<String, String> errors = new HashMap<>();
 
         ex.getBindingResult().getFieldErrors().forEach(error -> {
@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<@NonNull ErrorResponse> handleInvalidFormat(HttpMessageNotReadableException ex){
+    public ResponseEntity<ErrorResponse> handleInvalidFormat(HttpMessageNotReadableException ex){
         ErrorResponse error = new ErrorResponse(
                 "Invalid request format (check dates or JSON)",
                 HttpStatus.BAD_REQUEST.value(),
@@ -72,9 +72,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrity(DataIntegrityViolationException ex){
+        ErrorResponse error = new ErrorResponse(
+                ex.getMessage(),
+                HttpStatus.CONFLICT.value(),
+                LocalDate.now(),
+                null
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
     /*
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<@NonNull ErrorResponse> handleGeneral(Exception ex){
+    public ResponseEntity<ErrorResponse> handleGeneral(Exception ex){
         ErrorResponse error = new ErrorResponse(
                 "Internal server error :(",
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
