@@ -117,7 +117,7 @@ The project follows a unidirectional data flow to ensure maintainability:
 ## 🔮 Future Improvements
 
 * [ ] Implement security with **Spring Security & JWT**.
-* [incompatible for SpringBoot 4x] Interactive documentation with **Swagger / OpenAPI**.
+* [ X ] Interactive documentation with **Swagger / OpenAPI**.
 * [ ] Unit testing coverage with **JUnit 5 & Mockito**.
 * [ ] Containerization with **Docker**.
 * [ ] Advanced pagination and filtering for challenge lists.
