@@ -2,6 +2,7 @@ package com.gestion_retos.service;
 
 import com.gestion_retos.dto.challenge.ChallengeRequestDTO;
 import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
+import com.gestion_retos.exception.BusinessDataIntegrityException;
 import com.gestion_retos.exception.ResourceNotFoundException;
 import com.gestion_retos.exception.IllegalStateException;
 import com.gestion_retos.mapper.ChallengeMapper;
@@ -10,6 +11,7 @@ import com.gestion_retos.model.User;
 import com.gestion_retos.repository.ChallengeRepository;
 import com.gestion_retos.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,7 +36,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     public ChallengeResponseDTO getChallengeByID(Long id) {
         //1. exist | 2. find by id | 3. to dto
         Challenge challenge = repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id: "+id+" not exist"));
+                .orElseThrow(() -> new ResourceNotFoundException("challenge with id "+id+" not exist"));
         return ChallengeMapper.toResponseDto(challenge);
     }
 
@@ -69,7 +71,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Override
     public ChallengeResponseDTO updateChallenge(Long id, ChallengeRequestDTO challengeDto) {
         Challenge challenge = repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id: "+id+" not exist"));
+                .orElseThrow(() -> new ResourceNotFoundException("challenge with id "+id+" not exist"));
 
         User user = userRepo.findById(challengeDto.getCreatorId())
                         .orElseThrow(() -> new ResourceNotFoundException("creator not found"));
@@ -88,7 +90,11 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Override
     public void deleteChallenge(Long id) {
         Challenge challenge = repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id: "+id+" not exist"));
-        repo.delete(challenge);
+                .orElseThrow(() -> new ResourceNotFoundException("challenge with id "+id+" not exist"));
+        try {
+            repo.delete(challenge);
+        } catch (DataIntegrityViolationException e) {
+            throw new BusinessDataIntegrityException("challenge have relations with other tables");
+        }
     }
 }

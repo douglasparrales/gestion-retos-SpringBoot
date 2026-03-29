@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex){
 
         ErrorResponse error = new ErrorResponse(
-                "Resource not found :( ",
+                ex.getMessage(),
                 HttpStatus.NOT_FOUND.value(),
                 LocalDate.now(),
                 null
@@ -72,8 +72,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ErrorResponse> handleDataIntegrity(DataIntegrityViolationException ex){
+    @ExceptionHandler(BusinessDataIntegrityException.class)
+    public ResponseEntity<ErrorResponse> handleDataIntegrity(BusinessDataIntegrityException ex){
         ErrorResponse error = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.CONFLICT.value(),

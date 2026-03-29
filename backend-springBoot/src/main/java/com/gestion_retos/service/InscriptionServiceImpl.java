@@ -30,7 +30,7 @@ public class InscriptionServiceImpl implements InscriptionService{
     public List<UserResponseDTO> getUsersByChallenge(Long challengeId) {
         // exist challenge
         Challenge challenge = challengeRepo.findById(challengeId)
-                .orElseThrow(() -> new ResourceNotFoundException("id " + challengeId + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("challenge id " + challengeId + " not found"));
 
         // get enrollment
         List<Inscription> inscriptions = repo.findByChallenge_ChallengeId(challengeId);
@@ -56,9 +56,9 @@ public class InscriptionServiceImpl implements InscriptionService{
     public void createInscription(Long challengeId, Long userId) {
         //1. exist challenge and user | 2. save
         Challenge challenge = challengeRepo.findById(challengeId)
-                .orElseThrow(() -> new ResourceNotFoundException("id "+challengeId+" not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("challenge id "+challengeId+" not found"));
         User user = userRepo.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("id "+userId+" not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("user id "+userId+" not found"));
 
         if (repo.existsByUser_UserIdAndChallenge_ChallengeId(userId, challengeId)) {
             throw new IllegalStateException("User already registered in this challenge");
@@ -83,9 +83,9 @@ public class InscriptionServiceImpl implements InscriptionService{
     @Transactional
     public void completeChallenge(Long challengeId, Long userId) {
         Challenge challenge = challengeRepo.findById(challengeId)
-                .orElseThrow(() -> new ResourceNotFoundException("id "+challengeId+" not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("challenge id "+challengeId+" not found"));
         User user = userRepo.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("id "+userId+" not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("user id "+userId+" not found"));
 
         Inscription inscription = repo.findByUser_UserIdAndChallenge_ChallengeId(userId, challengeId)
                 .orElseThrow(() -> new IllegalStateException("User is not registered in this challenge"));

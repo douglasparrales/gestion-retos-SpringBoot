@@ -2,12 +2,14 @@ package com.gestion_retos.service;
 
 import com.gestion_retos.dto.user.UserRequestDTO;
 import com.gestion_retos.dto.user.UserResponseDTO;
+import com.gestion_retos.exception.BusinessDataIntegrityException;
 import com.gestion_retos.exception.ResourceNotFoundException;
 import com.gestion_retos.mapper.UserMapper;
 import com.gestion_retos.model.User;
 import com.gestion_retos.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User have been not found with id: " + id));
     }
 
-    //EXCEPTIONS GLOBALS I SHOULD TO IMPLEMENTS
 
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO updateUser(Long id, UserRequestDTO userRequestDTO) {
         //1. find exist id | 2. update and save | 3. entity to response dto
          User user = repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Id: " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("user with id " + id + " not found"));
 
          user.setUsername(userRequestDTO.getUsername());
          user.setEmail(userRequestDTO.getEmail());
@@ -65,8 +66,12 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         //1 find exist | 2. delete
         User user = repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Id: " + id + " not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("user with id " + id + " not found"));
 
+        try {
         repo.delete(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new BusinessDataIntegrityException("user have relations with other tables");
+        }
     }
 }
