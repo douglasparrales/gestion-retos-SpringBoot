@@ -1,7 +1,6 @@
 package com.gestion_retos.exception;
 
 import com.gestion_retos.payload.ErrorResponse;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
