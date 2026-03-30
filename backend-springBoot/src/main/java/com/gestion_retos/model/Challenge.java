@@ -2,6 +2,8 @@ package com.gestion_retos.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 
@@ -10,6 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Where(clause = "active = true")
+@SQLDelete(sql = "UPDATE challenge SET active = false WHERE challenge_id = ?")
 public class Challenge {
 
     @Id
@@ -31,4 +35,7 @@ public class Challenge {
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "creator")
     private User user;
+
+    @Column(nullable = false)
+    private boolean active = true;
 }

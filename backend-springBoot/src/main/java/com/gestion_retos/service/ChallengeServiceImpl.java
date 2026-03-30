@@ -91,10 +91,6 @@ public class ChallengeServiceImpl implements ChallengeService {
     public void deleteChallenge(Long id) {
         Challenge challenge = repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("challenge with id "+id+" not exist"));
-        try {
-            repo.delete(challenge);
-        } catch (DataIntegrityViolationException e) {
-            throw new BusinessDataIntegrityException("challenge have relations with other tables");
-        }
+        repo.delete(challenge);
     }
 }

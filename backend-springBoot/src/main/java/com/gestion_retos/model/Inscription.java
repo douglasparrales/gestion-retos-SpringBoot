@@ -23,7 +23,7 @@ public class Inscription {
     @Column(name = "inscription_date")
     private LocalDate inscriptionDate;
 
-    private boolean completed;
+    private boolean completed = false;
 
     //Foreign Key for user
     @ManyToOne(targetEntity = User.class)

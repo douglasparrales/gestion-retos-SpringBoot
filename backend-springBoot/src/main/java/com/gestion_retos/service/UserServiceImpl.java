@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserResponseDTO> getAllUsersByRanking() {
         //1. find all | 2.sort desc | 3. to dto | 4. to list
-        return repo.findByActiveTrue(Sort.by(Sort.Direction.DESC, "totalPoints"))
+        return repo.findAll(Sort.by(Sort.Direction.DESC, "totalPoints"))
                  .stream()
                  .map(UserMapper::toResponseDto)
                  .toList();
