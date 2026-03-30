@@ -2,7 +2,6 @@ package com.gestion_retos.service;
 
 import com.gestion_retos.dto.user.UserResponseDTO;
 import com.gestion_retos.exception.ResourceNotFoundException;
-import com.gestion_retos.mapper.UserMapper;
 import com.gestion_retos.model.Challenge;
 import com.gestion_retos.model.Inscription;
 import com.gestion_retos.model.User;

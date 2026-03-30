@@ -2,14 +2,11 @@ package com.gestion_retos.service;
 
 import com.gestion_retos.dto.user.UserRequestDTO;
 import com.gestion_retos.dto.user.UserResponseDTO;
-import com.gestion_retos.exception.BusinessDataIntegrityException;
 import com.gestion_retos.exception.ResourceNotFoundException;
 import com.gestion_retos.mapper.UserMapper;
 import com.gestion_retos.model.User;
 import com.gestion_retos.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserResponseDTO> getAllUsersByRanking() {
         //1. find all | 2.sort desc | 3. to dto | 4. to list
-         return repo.findAll(Sort.by(Sort.Direction.DESC, "totalPoints"))
+        return repo.findByActiveTrue(Sort.by(Sort.Direction.DESC, "totalPoints"))
                  .stream()
                  .map(UserMapper::toResponseDto)
                  .toList();
@@ -68,10 +65,13 @@ public class UserServiceImpl implements UserService {
         User user = repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("user with id " + id + " not found"));
 
-        try {
         repo.delete(user);
+    }
+}
+/* for hard soft:
+        try {
+
         } catch (DataIntegrityViolationException e) {
             throw new BusinessDataIntegrityException("user have relations with other tables");
         }
-    }
-}
+         */
