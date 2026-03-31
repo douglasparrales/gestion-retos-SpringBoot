@@ -2,8 +2,8 @@ package com.gestion_retos.controller;
 
 import com.gestion_retos.dto.user.UserRequestDTO;
 import com.gestion_retos.dto.user.UserResponseDTO;
-import com.gestion_retos.service.InscriptionService;
 import com.gestion_retos.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/user")
 @CrossOrigin(origins = "*")
+@Tag(name = "users", description = "controller for users")
 public class UserController {
 
     private final UserService userService;

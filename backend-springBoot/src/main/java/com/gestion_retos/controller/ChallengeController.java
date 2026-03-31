@@ -5,6 +5,8 @@ import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
 import com.gestion_retos.dto.user.UserResponseDTO;
 import com.gestion_retos.service.ChallengeService;
 import com.gestion_retos.service.InscriptionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/challenge")
 @AllArgsConstructor
+@Tag(name = "challenges", description = "controller for challenges")
 public class ChallengeController {
 
     private final ChallengeService challengeService;
@@ -40,6 +43,7 @@ public class ChallengeController {
         return ResponseEntity.created(URI.create("/system/api/v1/challenge/"+challengeResponseDTO.getChallengeId())).body(challengeResponseDTO);
     }
 
+    @Operation(summary = "create enrollment", description = "return enrollment by user id")
     @PostMapping("/{challengeId}/inscription/{userId}")
     public ResponseEntity<Void> createInscription(@PathVariable Long challengeId, @PathVariable Long userId){
         inscriptionService.createInscription(challengeId, userId);
@@ -52,6 +56,7 @@ public class ChallengeController {
         return ResponseEntity.ok(challengeResponseDTO);
     }
 
+    @Operation(summary = "complete challenge", description = "endpoint to mark challenge as complete")
     @PutMapping("/{challengeId}/complete/{userId}")
     public ResponseEntity<Void> completeChallenge(@PathVariable Long challengeId, @PathVariable Long userId){
         inscriptionService.completeChallenge(challengeId, userId);
@@ -64,6 +69,7 @@ public class ChallengeController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "users by challenge", description = "get all users enrollment in only one challenge")
     @GetMapping("/{challengeId}/user")
     public ResponseEntity<List<UserResponseDTO>> getUsersByChallenge(@PathVariable Long challengeId) {
         return ResponseEntity.ok(inscriptionService.getUsersByChallenge(challengeId));
