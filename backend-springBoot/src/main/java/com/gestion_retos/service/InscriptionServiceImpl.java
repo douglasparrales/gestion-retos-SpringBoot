@@ -65,9 +65,12 @@ public class InscriptionServiceImpl implements InscriptionService{
 
         LocalDate today = LocalDate.now();
 
-        if (challenge.getEndDate().isBefore(today)){
-            throw new IllegalStateException("Challenge is already expired");
+        if (challenge.getEndDate() != null){
+            if (challenge.getEndDate().isBefore(today)){
+                throw new IllegalStateException("Challenge is already expired");
+            }
         }
+
 
         Inscription inscription = new Inscription();
         inscription.setInscriptionDate(today);

@@ -25,6 +25,7 @@ public class ChallengeRequestDTO {
     private Integer points;
     @FutureOrPresent(message = "start date must future or present")
     private LocalDate startDate;
+
     private LocalDate endDate;
     private Long creatorId;
 }

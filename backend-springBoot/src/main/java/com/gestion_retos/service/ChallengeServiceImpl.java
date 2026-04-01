@@ -2,7 +2,6 @@ package com.gestion_retos.service;
 
 import com.gestion_retos.dto.challenge.ChallengeRequestDTO;
 import com.gestion_retos.dto.challenge.ChallengeResponseDTO;
-import com.gestion_retos.exception.BusinessDataIntegrityException;
 import com.gestion_retos.exception.ResourceNotFoundException;
 import com.gestion_retos.exception.IllegalStateException;
 import com.gestion_retos.mapper.ChallengeMapper;
@@ -11,7 +10,6 @@ import com.gestion_retos.model.User;
 import com.gestion_retos.repository.ChallengeRepository;
 import com.gestion_retos.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -27,8 +25,9 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Override
     public List<ChallengeResponseDTO> getAllChallenges() {
         //1. find all | 2. sort by end date before actual date | 3. to dto | 4. to list
-        return repo.findByEndDateAfter(LocalDate.now())
-                .stream().map(ChallengeMapper::toResponseDto)
+        return repo.findByEndDateAfterOrEndDateIsNull(LocalDate.now())
+                .stream()
+                .map(ChallengeMapper::toResponseDto)
                 .toList();
     }
 
@@ -65,6 +64,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
         Challenge challenge = ChallengeMapper.toEntity(challengeDto);
         challenge.setUser(user);
+        challenge.setActive(true);
         Challenge savedChallenge = repo.save(challenge);
         return ChallengeMapper.toResponseDto(savedChallenge);
     }
